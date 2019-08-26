@@ -1,0 +1,37 @@
+.container {
+  display: flex;
+  margin: 160px auto;
+  width: 754px;
+  height: 100%;
+}
+
+.sidebar {
+  display: flex;
+  flex-flow: column;
+  flex-grow: 1;
+  margin-right: 20px;
+}
+
+.ticketsBar {
+  display: flex;
+  flex-flow: column;
+  width: 502px;
+}
+
+.filter {
+  display: flex;
+  background-color: #fff;
+}
+
+.ticket {
+  display: flex;
+  flex-flow: column;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  background-color: #fff;
+
+  .price {
+    color: #2196F3;
+    font-weight: 600;
+  }
+}
