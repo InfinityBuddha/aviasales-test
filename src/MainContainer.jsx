@@ -11,23 +11,23 @@ class MainContainer extends Component {
                         <div className={s.header}>Количество пересадок</div>
                         <label className={s.checkbox}>
                             <input type='checkbox'/>
-                            Все
+                            <span>Все</span>
                         </label>
                         <label className={s.checkbox}>
                             <input type='checkbox'/>
-                            Без пересадок
+                            <span>Без пересадок</span>
                         </label>
                         <label className={s.checkbox}>
                             <input type='checkbox'/>
-                            1 пересадка
+                            <span>1 пересадка</span>
                         </label>
                         <label className={s.checkbox}>
                             <input type='checkbox'/>
-                            2 пересадки
+                            <span>2 пересадки</span>
                         </label>
                         <label className={s.checkbox}>
                             <input type='checkbox'/>
-                            3 пересадки
+                            <span>3 пересадки</span>
                         </label>
                     </div>
                 </div>
