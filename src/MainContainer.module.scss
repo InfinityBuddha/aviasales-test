@@ -94,6 +94,7 @@
     justify-content: center;
     align-items: center;
     flex-grow: 1;
+    cursor: pointer;
     &.active {
       color: #fff;
       background-color: #2196F3;
@@ -104,6 +105,8 @@
 .ticket {
   display: flex;
   padding: 20px;
+  padding-right: 50px;
+  margin-bottom: 20px;
   flex-flow: column;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
@@ -132,6 +135,10 @@
   .cell {
     display: flex;
     flex-flow: column;
+
+    &:last-child {
+      margin-right: 20px;
+    }
   }
 
   .title {
@@ -147,5 +154,13 @@
     font-size: 14px;
     line-height: 21px;
     color: #4A4A4A;
+  }
+  .logo {
+    width: 110px;
+    max-height: 36px;
+    img {
+      height: auto;
+      width: 100%;
+    }
   }
 }

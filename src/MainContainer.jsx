@@ -1,9 +1,38 @@
 import React, { Component } from 'react';
+import Ticket from './Ticket.jsx';
 import s from './MainContainer.module.scss';
 import cx from 'classnames';
 
 class MainContainer extends Component {
+    state = {
+        tickets: []
+    };
+
+    componentDidMount() {
+        this.fetchData()
+    }
+
+    getSearchId = () => fetch('https://front-test.beta.aviasales.ru/search')
+        .then(response => response.json())
+        .then(searchId => searchId)
+        .catch(err => console.error(err));
+
+    getTickets = (searchId) => fetch(`https://front-test.beta.aviasales.ru/tickets?searchId=${searchId}`)
+        .then(response => response.json())
+        .then(tickets => this.setState(() => ({ tickets: tickets.tickets })))
+        .catch(err => console.error(err));
+
+    async fetchData() {
+        try {
+            const { searchId } = await this.getSearchId();
+            await this.getTickets(searchId);
+        } catch (err) {
+            throw err;
+        }
+    }
+
     render() {
+        const { tickets } = this.state;
         return (
             <div className={s.container}>
                 <div className={s.filters}>
@@ -36,67 +65,10 @@ class MainContainer extends Component {
                         <li className={cx(s.tab, s.active)}>Самый дешевый</li>
                         <li className={s.tab}>Самый быстрый</li>
                     </ul>
-                    <div className={s.ticket}>
-                        <div className={s.header}>
-                            <span className={s.price}>13 400 Р</span>
-                            <div className={s.logo}>
-                                Airlines
-                            </div>
-                        </div>
-                        <div className={s.row}>
-                            <div className={s.cell}>
-                                <span className={s.title}>
-                                    MOW – HKT
-                                </span>
-                                <span className={s.value}>
-                                    10:45 – 08:00
-                                </span>
-                            </div>
-                            <div className={s.cell}>
-                                <span className={s.title}>
-                                В пути
-                                </span>
-                                <span className={s.value}>
-                                 21ч 15м
-                                </span>
-                            </div>
-                            <div className={s.cell}>
-                                <span className={s.title}>
-                                2 пересадки
-                            </span>
-                                <span className={s.value}>
-                                HKG, JNB
-                            </span>
-                            </div>
-                        </div>
-                        <div className={s.row}>
-                            <div className={s.cell}>
-                                <span className={s.title}>
-                                    MOW – HKT
-                                </span>
-                                <span className={s.value}>
-                                    10:45 – 08:00
-                                </span>
-                            </div>
-                            <div className={s.cell}>
-                                <span className={s.title}>
-                                В пути
-                                </span>
-                                <span className={s.value}>
-                                 21ч 15м
-                                </span>
-                            </div>
-                            <div className={s.cell}>
-                                <span className={s.title}>
-                                2 пересадки
-                            </span>
-                                <span className={s.value}>
-                                HKG, JNB
-                            </span>
-                            </div>
-                        </div>
-
-                    </div>
+                    {tickets.map((ticket, i) => <Ticket
+                        ticket={ticket}
+                        key={`${ticket.carrier}${i}`}
+                    />)}
                 </div>
             </div>
         );
