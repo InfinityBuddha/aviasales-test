@@ -1,24 +1,41 @@
 import React, { Component } from 'react';
 import s from './MainContainer.module.scss';
+import cx from 'classnames';
 
 class MainContainer extends Component {
     render() {
         return (
             <div className={s.container}>
-                <div className={s.sidebar}>
-                    <span>Количество пересадок</span>
-                    <input type='checkbox'/>
-                    <input type='checkbox'/>
-                    <input type='checkbox'/>
-                    <input type='checkbox'/>
-                    <input type='checkbox'/>
-                    <input type='checkbox'/>
+                <div className={s.filters}>
+                    <div className={s.filter}>
+                        <div className={s.header}>Количество пересадок</div>
+                        <label className={s.checkbox}>
+                            <input type='checkbox'/>
+                            Все
+                        </label>
+                        <label className={s.checkbox}>
+                            <input type='checkbox'/>
+                            Без пересадок
+                        </label>
+                        <label className={s.checkbox}>
+                            <input type='checkbox'/>
+                            1 пересадка
+                        </label>
+                        <label className={s.checkbox}>
+                            <input type='checkbox'/>
+                            2 пересадки
+                        </label>
+                        <label className={s.checkbox}>
+                            <input type='checkbox'/>
+                            3 пересадки
+                        </label>
+                    </div>
                 </div>
                 <div className={s.ticketsBar}>
-                    <div className={s.filter}>
-                        <button type='button' className={s.btn}>Самый дешевый</button>
-                        <button type='button' className={s.btn}>Самый быстрый</button>
-                    </div>
+                    <ul className={s.tabs}>
+                        <li className={cx(s.tab, s.active)}>Самый дешевый</li>
+                        <li className={s.tab}>Самый быстрый</li>
+                    </ul>
                     <div className={s.ticket}>
                         <div className={s.header}>
                             <span className={s.price}>13 400 Р</span>
