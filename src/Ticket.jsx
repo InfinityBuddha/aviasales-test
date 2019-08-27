@@ -1,5 +1,6 @@
 import React from 'react';
 import p from 'prop-types';
+import dayjs from 'dayjs';
 import s from './MainContainer.module.scss';
 
 const timeConvert = (time) => {
@@ -7,7 +8,11 @@ const timeConvert = (time) => {
     const rhours = Math.floor(hours);
     const minutes = (hours - rhours) * 60;
     const rminutes = Math.round(minutes);
-    return `${rhours}ч ${rminutes}м`
+    return {
+        hours: rhours,
+        minutes: rminutes,
+        'HH:mm': `${rhours}ч ${rminutes}м`
+    }
 };
 
 const Ticket = ({ ticket }) => {
@@ -30,31 +35,34 @@ const Ticket = ({ ticket }) => {
                     <span className={s.title}>
                         {ticket.segments[0].origin} – {ticket.segments[0].destination}
                     </span>
-                    <span className={s.value}>
-                        10:45 – 08:00
-                    </span>
+                    <span className={s.value}>{`${dayjs(new Date(ticket.segments[0].date)).format('HH:mm')} - ${dayjs(new Date(ticket.segments[0].date))
+                        .add(timeConvert(ticket.segments[0].duration).hours, 'hours')
+                        .add(timeConvert(ticket.segments[0].duration).minutes, 'minutes')
+                        .format('HH:mm')
+                    }`}</span>
                 </div>
                 <div className={s.cell}>
                     <span className={s.title}>В пути</span>
-                    <span className={s.value}>{timeConvert(ticket.segments[0].duration)}</span>
+                    <span className={s.value}>{timeConvert(ticket.segments[0].duration)['HH:mm']}</span>
                 </div>
                 <div className={s.cell}>
-                     <span className={s.title}>
-                        2 пересадки
+                     <span className={s.title}>2 пересадки
                     </span>
-                    <span className={s.value}>
-                        HKG, JNB
-                    </span>
+                    <span className={s.value}>HKG, JNB</span>
                 </div>
             </div>
             <div className={s.row}>
                 <div className={s.cell}>
-                    <span className={s.title}>MOW – HKT</span>
-                    <span className={s.value}>10:45 – 08:00</span>
+                    <span className={s.title}>{ticket.segments[1].origin} – {ticket.segments[1].destination}</span>
+                    <span className={s.value}>{`${dayjs(new Date(ticket.segments[1].date)).format('HH:mm')} - ${dayjs(new Date(ticket.segments[1].date))
+                        .add(timeConvert(ticket.segments[1].duration).hours, 'hours')
+                        .add(timeConvert(ticket.segments[1].duration).minutes, 'minutes')
+                        .format('HH:mm')
+                        }`}</span>
                 </div>
                 <div className={s.cell}>
                     <span className={s.title}>В пути</span>
-                    <span className={s.value}>{timeConvert(ticket.segments[1].duration)}</span>
+                    <span className={s.value}>{timeConvert(ticket.segments[1].duration)['HH:mm']}</span>
                 </div>
                 <div className={s.cell}>
                     <span className={s.title}>2 пересадки</span>

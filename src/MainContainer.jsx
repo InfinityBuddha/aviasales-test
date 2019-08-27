@@ -5,7 +5,8 @@ import cx from 'classnames';
 
 class MainContainer extends Component {
     state = {
-        tickets: []
+        tickets: [],
+        ticketsError: null
     };
 
     componentDidMount() {
@@ -15,24 +16,31 @@ class MainContainer extends Component {
     getSearchId = () => fetch('https://front-test.beta.aviasales.ru/search')
         .then(response => response.json())
         .then(searchId => searchId)
-        .catch(err => console.error(err));
+        .catch(err => {
+            this.setState(() => ({ error: true }));
+            throw err;
+        });
 
     getTickets = (searchId) => fetch(`https://front-test.beta.aviasales.ru/tickets?searchId=${searchId}`)
         .then(response => response.json())
         .then(tickets => this.setState(() => ({ tickets: tickets.tickets })))
-        .catch(err => console.error(err));
+        .catch(err => {
+            this.setState(() => ({ error: true }));
+            throw err;
+        });
 
     async fetchData() {
         try {
             const { searchId } = await this.getSearchId();
             await this.getTickets(searchId);
         } catch (err) {
+            this.setState(() => ({ error: true }));
             throw err;
         }
     }
 
     render() {
-        const { tickets } = this.state;
+        const { tickets, error } = this.state;
         return (
             <div className={s.container}>
                 <div className={s.filters}>
@@ -69,6 +77,7 @@ class MainContainer extends Component {
                         ticket={ticket}
                         key={`${ticket.carrier}${i}`}
                     />)}
+                    {error && <div className={s.errorMessage}>Ошибка! Перезагрузите страницу.</div>}
                 </div>
             </div>
         );
