@@ -39,7 +39,7 @@ class MainContainer extends Component {
 
     getTickets = (searchId) => fetch(`https://front-test.beta.aviasales.ru/tickets?searchId=${searchId}`)
         .then(response => response.json())
-        .then(tickets => this.setState(() => ({ tickets: tickets.tickets.slice(0, 100), isFetching: false })))
+        .then(tickets => this.setState(() => ({ tickets: tickets.tickets.slice(0, 10), isFetching: false })))
         .catch(err => {
             this.setState(() => ({ error: true, isFetching: false }));
             throw err;
