@@ -101,7 +101,6 @@ class MainContainer extends Component {
                 (this.state.filters[3].checked && ticket.segments.every(item => item.stops.length >= 1 && item.stops.length <= 2)) ||
                 (this.state.filters[4].checked && ticket.segments.every(item => item.stops.length >= 2 && item.stops.length <= 3))
             ) {
-                console.log('1:');
                 return <Ticket
                     ticket={ticket}
                     key={`${ticket.carrier}${i}`}
