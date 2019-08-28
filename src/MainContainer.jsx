@@ -4,8 +4,8 @@ import Ticket from './Ticket.jsx';
 import s from './MainContainer.module.scss';
 import { sortByPrice, sortByDuration } from './helpers.js';
 import Checkbox from "./Checkbox";
-import Tab from "./Tab";
-import Logo from "./static/Logo";
+import Tab from './Tab';
+import Logo from './static/Logo';
 
 class MainContainer extends Component {
     state = {
@@ -23,7 +23,7 @@ class MainContainer extends Component {
     };
 
     componentDidMount() {
-        this.fetchData();
+        this.fetchTickets();
     }
 
     getSearchId = () => fetch('https://front-test.beta.aviasales.ru/search')
@@ -45,7 +45,7 @@ class MainContainer extends Component {
             throw err;
         });
 
-    async fetchData() {
+    async fetchTickets() {
         try {
             const { searchId } = await this.getSearchId();
             await this.getTickets(searchId);
@@ -101,6 +101,7 @@ class MainContainer extends Component {
                 (this.state.filters[3].checked && ticket.segments.every(item => item.stops.length >= 1 && item.stops.length <= 2)) ||
                 (this.state.filters[4].checked && ticket.segments.every(item => item.stops.length >= 2 && item.stops.length <= 3))
             ) {
+                console.log('1:');
                 return <Ticket
                     ticket={ticket}
                     key={`${ticket.carrier}${i}`}

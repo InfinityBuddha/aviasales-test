@@ -4,11 +4,11 @@ const Logo = ({ className }) => {
     return (
         <svg width="82" height="89" viewBox="0 0 82 89" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
             <g filter="url(#filter0_d)">
-                <path fillRule="evenodd" clipRule="evenodd" d="M41 70C53.1503 70 63 60.1503 63 48C63 35.8497 53.1503 26 41 26C28.8497 26 19 35.8497 19 48C19 60.1503 28.8497 70 41 70Z" fill="black" fill-opacity="0.01"/>
+                <path fillRule="evenodd" clipRule="evenodd" d="M41 70C53.1503 70 63 60.1503 63 48C63 35.8497 53.1503 26 41 26C28.8497 26 19 35.8497 19 48C19 60.1503 28.8497 70 41 70Z" fill="black" fillOpacity="0.01"/>
             </g>
             <g filter="url(#filter1_d)">
                 <path fillRule="evenodd" clipRule="evenodd" d="M41 70C57.5685 70 71 56.5685 71 40C71 23.4315 57.5685 10 41 10C24.4315 10 11 23.4315 11 40C11 56.5685 24.4315 70 41 70Z" fill="#2196F3"/>
-                <path d="M69 40C69 55.464 56.464 68 41 68C25.536 68 13 55.464 13 40C13 24.536 25.536 12 41 12C56.464 12 69 24.536 69 40Z" stroke="#42A5F5" stroke-width="4"/>
+                <path d="M69 40C69 55.464 56.464 68 41 68C25.536 68 13 55.464 13 40C13 24.536 25.536 12 41 12C56.464 12 69 24.536 69 40Z" stroke="#42A5F5" strokeWidth="4"/>
             </g>
             <mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="11" y="10" width="60" height="60">
                 <path fillRule="evenodd" clipRule="evenodd" d="M41 70C57.5685 70 71 56.5685 71 40C71 23.4315 57.5685 10 41 10C24.4315 10 11 23.4315 11 40C11 56.5685 24.4315 70 41 70Z" fill="white"/>
@@ -31,8 +31,8 @@ const Logo = ({ className }) => {
                 <path fillRule="evenodd" clipRule="evenodd" d="M57.4822 32.9524L27.6913 50.1523C27.6913 50.1523 26.8122 48.5636 26.0792 47.2939C26.0703 47.2786 26.062 47.263 26.0541 47.2473C27.4056 47.345 30.1268 47.2351 32.766 45.7114L53.3906 33.8038C55.6822 32.4807 56.2435 30.7674 56.5526 30.0309C57.0311 31.316 57.4822 32.9524 57.4822 32.9524Z" fill="#DEE1E3"/>
             </g>
             <defs>
-                <filter id="filter0_d" x="8" y="23" width="66" height="66" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                <filter id="filter0_d" x="8" y="23" width="66" height="66" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                    <feFlood floodOpacity="0" result="BackgroundImageFix"/>
                     <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
                     <feOffset dy="8"/>
                     <feGaussianBlur stdDeviation="5.5"/>
@@ -40,8 +40,8 @@ const Logo = ({ className }) => {
                     <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
                     <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
                 </filter>
-                <filter id="filter1_d" x="0" y="0" width="82" height="82" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                <filter id="filter1_d" x="0" y="0" width="82" height="82" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                    <feFlood floodOpacity="0" result="BackgroundImageFix"/>
                     <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
                     <feOffset dy="1"/>
                     <feGaussianBlur stdDeviation="5.5"/>

@@ -1,7 +1,7 @@
 import React from 'react';
 import p from 'prop-types';
-import s from "./Tab.module.scss";
-import cx from "classnames";
+import s from './Tab.module.scss';
+import cx from 'classnames';
 
 const Tab = ({ tabs, activeTab, onClick }) => {
     return (
