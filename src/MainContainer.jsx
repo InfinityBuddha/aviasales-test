@@ -31,7 +31,7 @@ class MainContainer extends Component {
 
     getTickets = (searchId) => fetch(`https://front-test.beta.aviasales.ru/tickets?searchId=${searchId}`)
         .then(response => response.json())
-        .then(tickets => this.setState(() => ({ tickets: tickets.tickets.slice(0, 100)})))
+        .then(tickets => this.setState(() => ({tickets: tickets.tickets.slice(0, 100)})))
         .catch(err => {
             this.setState(() => ({ error: true }));
             throw err;
@@ -55,54 +55,17 @@ class MainContainer extends Component {
         return a > b ? 1 : -1;
     };
 
-    sortByDuration = () => (a, b) => this.compare({ a: a.segments[0].duration + a.segments[1].duration, b: b.segments[0].duration + b.segments[1].duration });
+    sortByDuration = () => (a, b) => this.compare({
+        a: a.segments[0].duration + a.segments[1].duration,
+        b: b.segments[0].duration + b.segments[1].duration
+    });
 
     sortByPrice = () => (a, b) => this.compare({ a: a.price, b: b.price });
 
-    sorting = ({ type, sortFunction }) => this.setState({ tickets: this.state.tickets.sort(sortFunction), activeSort: type });
-
-    filter = ({ type, checked }) => {
-        const newFilters = [...this.state.filters];
-        const ticketsToFilter = [...this.state.tickets];
-        const filterFunction = (item) => {
-            switch (type) {
-                case 'stops_all': {
-                    return true;
-                }
-
-                case 'stops_0': {
-                    return item.segments.every(item => item.stops.length === 0)
-                }
-
-                case 'stops_1': {
-                    return item.segments.every(item => item.stops.length === 1)
-                }
-
-                case 'stops_2': {
-                    return item.segments.every(item => item.stops.length === 2)
-                }
-
-                case 'stops_3': {
-                    return item.segments.every(item => item.stops.length === 3)
-                }
-                default: {
-                    break;
-                }
-            }
-        };
-        const result = newFilters.map(item => {
-            if (item.type === type && item.checked) {
-                item.checked = false;
-            } else if (item.type === type && !item.checked) {
-                item.checked = true;
-            }
-            return item;
-        });
-
-        this.setState({
-            filters: result
-        })
-    };
+    sorting = ({ type, sortFunction }) => this.setState({
+        tickets: this.state.tickets.sort(sortFunction),
+        activeSort: type
+    });
 
     handleCheckAll = (e) => {
         let filters = [...this.state.filters];
@@ -111,32 +74,66 @@ class MainContainer extends Component {
     };
 
     handleChecked = (e) => {
+        const { value, checked } = e.target;
         let filters = [...this.state.filters];
         filters.forEach(item => {
             if (e.target.value === 'stops_all') {
                 this.handleCheckAll(e)
             }
-            if (item.type === e.target.value) {
-                item.checked = e.target.checked;
+            if (item.type === value) {
+                item.checked = checked;
             }
         });
-        this.setState({ filters })
+        this.setState(() => ({ filters }))
+    };
+
+    renderTickets = (tickets) => {
+        return tickets.map((ticket, i) => {
+            if (ticket.segments[0].stops.length === 0 && ticket.segments[1].stops.length === 0 && this.state.filters[1].checked) {
+                return <Ticket
+                    ticket={ticket}
+                    key={`${ticket.carrier}${i}`}
+                />
+            }
+
+            if (ticket.segments[0].stops.length === 1 && ticket.segments[1].stops.length === 1 && this.state.filters[2].checked) {
+                return <Ticket
+                    ticket={ticket}
+                    key={`${ticket.carrier}${i}`}
+                />
+            }
+
+            if (ticket.segments[0].stops.length === 2 && ticket.segments[1].stops.length === 2 && this.state.filters[3].checked) {
+                return <Ticket
+                    ticket={ticket}
+                    key={`${ticket.carrier}${i}`}
+                />
+            }
+
+            if (ticket.segments[0].stops.length === 3 && ticket.segments[1].stops.length === 3 && this.state.filters[4].checked) {
+                return <Ticket
+                    ticket={ticket}
+                    key={`${ticket.carrier}${i}`}
+                />
+            }
+        })
     };
 
     render() {
-        const { tickets, error, activeSort } = this.state;
+        const { tickets, error, activeSort, filters } = this.state;
         const sorting = [
-            { title: 'Самый дешевый', type: 'price', sortFunction: this.sortByPrice()},
-            { title: 'Самый быстрый', type: 'duration', sortFunction: this.sortByDuration()}];
+            { title: 'Самый дешевый', type: 'price', sortFunction: this.sortByPrice() },
+            { title: 'Самый быстрый', type: 'duration', sortFunction: this.sortByDuration() }];
 
         return (
             <div className={s.container}>
                 <div className={s.filters}>
                     <div className={s.filter}>
                         <div className={s.header}>Количество пересадок</div>
-                        {this.state.filters.map(filter => {
+                        {filters.map(filter => {
                             return <label className={s.checkbox}>
-                                <input type='checkbox' onChange={this.handleChecked} value={filter.type} checked={filter.checked} />
+                                <input type='checkbox' onChange={this.handleChecked} value={filter.type}
+                                       checked={filter.checked}/>
                                 <span>{filter.title}</span>
                             </label>
                         })}
@@ -147,14 +144,15 @@ class MainContainer extends Component {
                         {sorting.map(tab => <li
                             className={cx(s.sortTab,
                                 activeSort === tab.type && s.active)}
-                            onClick={() => this.sorting({ type: tab.type, sortFunction: tab.sortFunction })}>{tab.title}</li>)}
+                            onClick={() => this.sorting({
+                                type: tab.type,
+                                sortFunction: tab.sortFunction
+                            })}>{tab.title}</li>)}
                     </ul>
-                    {tickets.map((ticket, i) => <Ticket
-                        ticket={ticket}
-                        key={`${ticket.carrier}${i}`}
-                    />)}
+                    {this.renderTickets(tickets)}
                     {error &&
-                    <div className={s.errorMessage} onClick={() => document.location.reload(true)}>Ошибка! Перезагрузите страницу.</div>}
+                    <div className={s.errorMessage} onClick={() => document.location.reload(true)}>Ошибка! Перезагрузите
+                        страницу.</div>}
                 </div>
             </div>
         );
