@@ -11,7 +11,7 @@
   .header {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 22px;
+    margin-bottom: 21px;
   }
 
   .price {
@@ -24,7 +24,7 @@
     display: flex;
     justify-content: space-between;
     &:not(:last-child) {
-      margin-bottom: 9px;
+      margin-bottom: 8px;
     }
   }
 

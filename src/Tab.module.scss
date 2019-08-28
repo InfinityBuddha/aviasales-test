@@ -17,7 +17,14 @@
     align-items: center;
     flex-grow: 1;
     cursor: pointer;
+    border: 1px solid #DFE5EC;
+    border-radius: 5px 0 0 5px;
+
+    &:last-child {
+      border-radius: 0 5px 5px 0;
+    }
     &.active {
+      border: none;
       color: #fff;
       background-color: #2196F3;
     }

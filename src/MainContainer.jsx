@@ -16,7 +16,7 @@ class MainContainer extends Component {
         filters: [
             { title: 'Все', type: 'stops_all', checked: false },
             { title: 'Без пересадок', type: 'stops_0', checked: true },
-            { title: '1 пересадка', type: 'stops_1', checked: true },
+            { title: '1 пересадка', type: 'stops_1', checked: true},
             { title: '2 пересадки', type: 'stops_2', checked: true },
             { title: '3 пересадки', type: 'stops_3', checked: false }
         ],
@@ -29,7 +29,8 @@ class MainContainer extends Component {
     getSearchId = () => fetch('https://front-test.beta.aviasales.ru/search')
         .then(response => {
             this.setState(() => ({ isFetching: true }));
-            return response.json()})
+            return response.json()
+        })
         .then(searchId => searchId)
         .catch(err => {
             this.setState(() => ({ error: true }));
@@ -62,17 +63,23 @@ class MainContainer extends Component {
 
     handleCheckAll = (e) => {
         let filters = [...this.state.filters];
-        filters.forEach(filter => filter.checked = e.target.checked);
-        this.setState({ filters })
+
+        if (filters.every(filter => filter.checked)) {
+            this.setState({
+                filters: filters[0].checked = false
+            })
+        }
+        if (e.target.value === 'stops_all') {
+            filters.forEach(filter => filter.checked = e.target.checked);
+            this.setState({ filters })
+        }
     };
 
     handleChecked = (e) => {
         const { value, checked } = e.target;
         let filters = [...this.state.filters];
         filters.forEach(item => {
-            if (e.target.value === 'stops_all') {
-                this.handleCheckAll(e)
-            }
+            this.handleCheckAll(e)
             if (item.type === value) {
                 item.checked = checked;
             }
@@ -88,10 +95,11 @@ class MainContainer extends Component {
                     key={`${ticket.carrier}${i}`}
                 />
             }
-            if ((this.state.filters[1].checked && ticket.segments[0].stops.length === 0 && ticket.segments[1].stops.length === 0) ||
-                (this.state.filters[2].checked && ticket.segments[0].stops.length === 1 && ticket.segments[1].stops.length === 1) ||
-                (this.state.filters[3].checked && ticket.segments[0].stops.length === 2 && ticket.segments[1].stops.length === 2) ||
-                (this.state.filters[4].checked && ticket.segments[0].stops.length === 3 && ticket.segments[1].stops.length === 3)
+
+            if ((this.state.filters[1].checked && ticket.segments.every(item => item.stops.length === 0)) ||
+                (this.state.filters[2].checked && ticket.segments.every(item => item.stops.length >= 0 && item.stops.length <= 1)) ||
+                (this.state.filters[3].checked && ticket.segments.every(item => item.stops.length >= 1 && item.stops.length <= 2)) ||
+                (this.state.filters[4].checked && ticket.segments.every(item => item.stops.length >= 2 && item.stops.length <= 3))
             ) {
                 return <Ticket
                     ticket={ticket}
@@ -129,9 +137,10 @@ class MainContainer extends Component {
 
                     {this.renderTickets(tickets)}
 
-                    {isFetching && <Logo className={s.logo} />}
+                    {isFetching && <Logo className={s.logo}/>}
                     {error &&
-                    <div className={s.errorMessage} onClick={() => document.location.reload(true)}>Ошибка! Перезагрузите страницу.</div>}
+                    <div className={s.errorMessage} onClick={() => document.location.reload(true)}>Ошибка! Перезагрузите
+                        страницу.</div>}
                 </div>
             </div>
         );
