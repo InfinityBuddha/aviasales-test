@@ -46,9 +46,8 @@ const Ticket = ({ ticket }) => {
                     <span className={s.value}>{timeConvert(ticket.segments[0].duration)['HH:mm']}</span>
                 </div>
                 <div className={s.cell}>
-                     <span className={s.title}>2 пересадки
-                    </span>
-                    <span className={s.value}>HKG, JNB</span>
+                     <span className={s.title}>{ticket.segments[0].stops.length} пересадки</span>
+                    <span className={s.value}>{ticket.segments[0].stops.join(', ') || '-'}</span>
                 </div>
             </div>
             <div className={s.row}>
@@ -65,8 +64,8 @@ const Ticket = ({ ticket }) => {
                     <span className={s.value}>{timeConvert(ticket.segments[1].duration)['HH:mm']}</span>
                 </div>
                 <div className={s.cell}>
-                    <span className={s.title}>2 пересадки</span>
-                    <span className={s.value}>HKG, JNB</span>
+                    <span className={s.title}>{ticket.segments[1].stops.length} пересадки</span>
+                    <span className={s.value}>{ticket.segments[1].stops.join(', ') || '-'}</span>
                 </div>
             </div>
 

@@ -76,7 +76,7 @@
   width: 502px;
 }
 
-.tabs {
+.sorting {
   display: flex;
   margin: 0 0 20px 0;
   padding: 0;
@@ -84,7 +84,7 @@
   list-style: none;
   border-radius: 5px;
   overflow: hidden;
-  .tab {
+  .sortTab {
     display: flex;
     padding: 15px 0 15px 0;
     font-size: 12px;
@@ -135,13 +135,12 @@
   .cell {
     display: flex;
     flex-flow: column;
-
-    &:last-child {
-      margin-right: 20px;
-    }
+    width: 115px;
+    align-items: flex-start;
   }
 
   .title {
+    text-align: right;
     font-weight: 600;
     font-size: 12px;
     line-height: 18px;
@@ -157,7 +156,7 @@
   }
   .logo {
     width: 110px;
-    max-height: 36px;
+    height: 36px;
     img {
       height: auto;
       width: 100%;
