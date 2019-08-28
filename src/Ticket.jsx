@@ -1,19 +1,8 @@
 import React from 'react';
 import p from 'prop-types';
 import dayjs from 'dayjs';
-import s from './MainContainer.module.scss';
-
-const timeConvert = (time) => {
-    const hours = (time / 60);
-    const rhours = Math.floor(hours);
-    const minutes = (hours - rhours) * 60;
-    const rminutes = Math.round(minutes);
-    return {
-        hours: rhours,
-        minutes: rminutes,
-        'HH:mm': `${rhours}ч ${rminutes}м`
-    }
-};
+import { timeConvert } from './helpers.js';
+import s from './Ticket.module.scss';
 
 const Ticket = ({ ticket }) => {
     return (
@@ -46,7 +35,7 @@ const Ticket = ({ ticket }) => {
                     <span className={s.value}>{timeConvert(ticket.segments[0].duration)['HH:mm']}</span>
                 </div>
                 <div className={s.cell}>
-                     <span className={s.title}>{ticket.segments[0].stops.length} пересадки</span>
+                     <span className={s.title}>{ticket.segments[0].stops && ticket.segments[0].stops.length} пересадки</span>
                     <span className={s.value}>{ticket.segments[0].stops.join(', ') || '-'}</span>
                 </div>
             </div>
@@ -64,8 +53,8 @@ const Ticket = ({ ticket }) => {
                     <span className={s.value}>{timeConvert(ticket.segments[1].duration)['HH:mm']}</span>
                 </div>
                 <div className={s.cell}>
-                    <span className={s.title}>{ticket.segments[1].stops.length} пересадки</span>
-                    <span className={s.value}>{ticket.segments[1].stops.join(', ') || '-'}</span>
+                    <span className={s.title}>{ticket.segments[1].stops && ticket.segments[1].stops.length} пересадки</span>
+                    <span className={s.value}>{(ticket.segments[1].stops && ticket.segments[1].stops.join(', ')) || '-'}</span>
                 </div>
             </div>
 

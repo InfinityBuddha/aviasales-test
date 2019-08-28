@@ -1,0 +1,25 @@
+.tabs {
+  display: flex;
+  margin: 0 0 20px 0;
+  padding: 0;
+  background-color: #fff;
+  list-style: none;
+  border-radius: 5px;
+  overflow: hidden;
+  .tab {
+    display: flex;
+    padding: 15px 0 15px 0;
+    font-size: 12px;
+    font-weight: 600;
+    color: #4A4A4A;
+    text-transform: uppercase;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    cursor: pointer;
+    &.active {
+      color: #fff;
+      background-color: #2196F3;
+    }
+  }
+}

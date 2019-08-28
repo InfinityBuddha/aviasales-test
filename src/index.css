@@ -15,7 +15,7 @@ body {
 @font-face {
   font-family: 'Open Sans';
   src: url("/fonts");
-  src: url("/fonts/opensans.woff") format("woff");
+  src: url("/fonts/opensans.woff") format("font-woff");
   font-weight: normal;
   font-style: normal;
 }
@@ -23,7 +23,7 @@ body {
 @font-face {
   font-family: 'Open Sans';
   src: url("/fonts/opensanssemibold.woff");
-  src: url("/fonts/opensanssemibold.woff") format("woff");
+  src: url("/fonts/opensanssemibold.woff") format("font-woff");
   font-weight: 600;
   font-style: normal;
 }
@@ -31,7 +31,7 @@ body {
 @font-face {
   font-family: 'Open Sans';
   src: url("/fonts/opensansbold.woff");
-  src: url("/fonts/opensansbold.woff") format("woff");
+  src: url("/fonts/opensansbold.woff") format("font-woff");
   font-weight: 700;
   font-style: normal;
 }
