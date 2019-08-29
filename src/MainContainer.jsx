@@ -147,12 +147,5 @@ class MainContainer extends Component {
     }
 }
 
-MainContainer.propTypes = {
-    activeSort: p.string,
-    filter: p.array,
-    tickets: p.array,
-    ticketError: p.bool
-};
-
 export default MainContainer;
 
