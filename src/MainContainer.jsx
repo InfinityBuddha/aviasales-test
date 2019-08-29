@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import p from 'prop-types';
 import Ticket from './Ticket.jsx';
 import s from './MainContainer.module.scss';
 import { sortByPrice, sortByDuration } from './helpers.js';
